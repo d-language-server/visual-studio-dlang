@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualDLS", "VisualDLS\VisualDLS.csproj", "{0456B894-2A9D-4182-9C57-AE981737DFC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLanguageExtension", "DLanguageExtension\DLanguageExtension.csproj", "{0456B894-2A9D-4182-9C57-AE981737DFC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

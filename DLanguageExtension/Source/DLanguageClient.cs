@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
-namespace VisualDLS
+namespace DLanguageExtension
 {
     public sealed class DContentDefinition
     {

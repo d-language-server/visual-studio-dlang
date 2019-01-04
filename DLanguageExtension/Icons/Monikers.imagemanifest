@@ -3,7 +3,7 @@
 <!-- Version: 14.0.50929.2 -->
 <ImageManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/VisualStudio/ImageManifestSchema/2014">
   <Symbols>
-    <String Name="Resources" Value="/VisualDLS;Component/Icons" />
+    <String Name="Resources" Value="/DLanguageExtension;Component/Icons" />
     <Guid Name="AssetsGuid" Value="{fc64b49a-9508-49e4-9522-14c73a839464}" />
     <ID Name="d" Value="0" />
   </Symbols>

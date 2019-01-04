@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
-namespace VisualDLS
+namespace DLanguageExtension
 {
     [Guid("72b3f735-1eeb-4f3a-9ef2-bc40c4a2036a")]
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]

@@ -23,8 +23,8 @@
     <ProjectGuid>{0456B894-2A9D-4182-9C57-AE981737DFC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VisualDLS</RootNamespace>
-    <AssemblyName>VisualDLS</AssemblyName>
+    <RootNamespace>DLanguageExtension</RootNamespace>
+    <AssemblyName>DLanguageExtension</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
