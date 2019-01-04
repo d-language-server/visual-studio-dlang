@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.LanguageServer.Client;
+﻿using Microsoft.VisualStudio.Imaging;
+using Microsoft.VisualStudio.Imaging.Interop;
+using Microsoft.VisualStudio.LanguageServer.Client;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
@@ -62,6 +64,15 @@ namespace DLanguageExtension
 
             if (!File.Exists(dlsPath))
             {
+                var dub = FindInPath(new string[] { "dub.exe" });
+                var compiler = FindInPath(new string[] { "dmd.exe", "ldc2.exe" });
+
+                if (dub == null || compiler == null)
+                {
+                    await ShowMessageAsync(dub == null ? "Dub not found" : "No D compiler found", KnownMonikers.StatusError);
+                    return null;
+                }
+
                 await WithStatusbarAsync(sb => sb.SetText("Removing any previous DLS version"));
                 info.Arguments = "remove dls";
                 var removeProcess = new Process() { StartInfo = info };
@@ -100,6 +111,39 @@ namespace DLanguageExtension
         public Task OnServerInitializedAsync() => Task.CompletedTask;
 
         public Task OnServerInitializeFailedAsync(Exception e) => Task.CompletedTask;
+
+        private string FindInPath(string[] binaries)
+        {
+            foreach (var path in Environment.GetEnvironmentVariable("PATH").Split(';'))
+            {
+                foreach (var binary in binaries)
+                {
+                    if (File.Exists(Path.Combine(path, binary)))
+                    {
+                        return binary;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private async Task ShowMessageAsync(string msg, ImageMoniker moniker)
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var shell = await ServiceProvider.GetGlobalServiceAsync<SVsShell, IVsShell>();
+            shell.GetProperty((int)__VSSPROPID7.VSSPROPID_MainWindowInfoBarHost, out var hostObj);
+
+            if (hostObj == null)
+            {
+                return;
+            }
+
+            var infobar = await ServiceProvider.GetGlobalServiceAsync<SVsInfoBarUIFactory, IVsInfoBarUIFactory>();
+            var uiInfobar = infobar.CreateInfoBar(new InfoBarModel(msg, moniker));
+            var host = hostObj as IVsInfoBarHost;
+            host.AddInfoBar(uiInfobar);
+        }
 
         private async Task ReportInstallProgressAsync(StreamReader error)
         {
