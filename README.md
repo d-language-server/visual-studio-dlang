@@ -12,4 +12,5 @@ Far from every possible feature is implemented, but the server will update itsel
 
 ## Requirements
 
+Viusual Studio 2017 version 15.8 is the minimum required version.
 Dub and either DMD or LDC should be installed for the extension to work properly.

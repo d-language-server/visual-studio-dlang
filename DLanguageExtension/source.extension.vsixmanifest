@@ -6,6 +6,7 @@
         <Description xml:space="preserve">D language support for Visual Studio</Description>
         <MoreInfo>http://github.com/d-language-server/visual-studio-dlang</MoreInfo>
         <License>LICENSE.txt</License>
+        <GettingStartedGuide>README.txt</GettingStartedGuide>
         <Icon>Resources\icon.png</Icon>
         <Tags>d dlang lsp language-server</Tags>
     </Metadata>
