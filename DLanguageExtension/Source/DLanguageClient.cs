@@ -69,29 +69,29 @@ namespace DLanguageExtension
 
                 if (dub == null || compiler == null)
                 {
-                    await ShowMessageAsync(dub == null ? "Dub not found" : "No D compiler found", KnownMonikers.StatusError);
+                    await ShowMessageAsync(dub == null ? "Dub not found" : "No D compiler found", KnownMonikers.StatusError).ConfigureAwait(false);
                     return null;
                 }
 
-                await WithStatusbarAsync(sb => sb.SetText("Removing any previous DLS version")).ConfigureAwait(false);
+                await WithStatusbarAsync(sb => { ThreadHelper.ThrowIfNotOnUIThread(); sb.SetText("Removing any previous DLS version"); }).ConfigureAwait(false);
                 info.Arguments = "remove dls";
                 var removeProcess = new Process() { StartInfo = info };
                 removeProcess.Start();
-                await removeProcess.WaitForExitAsync();
+                await removeProcess.WaitForExitAsync().ConfigureAwait(false);
 
-                await WithStatusbarAsync(sb => sb.SetText("Fetching DLS")).ConfigureAwait(false);
+                await WithStatusbarAsync(sb => { ThreadHelper.ThrowIfNotOnUIThread(); sb.SetText("Fetching DLS"); }).ConfigureAwait(false);
                 info.Arguments = "fetch dls";
                 var fetchProcess = new Process() { StartInfo = info };
                 fetchProcess.Start();
-                await fetchProcess.WaitForExitAsync();
+                await fetchProcess.WaitForExitAsync().ConfigureAwait(false);
 
-                await WithStatusbarAsync(sb => sb.SetText("Installing DLS")).ConfigureAwait(false);
+                await WithStatusbarAsync(sb => { ThreadHelper.ThrowIfNotOnUIThread(); sb.SetText("Installing DLS"); }).ConfigureAwait(false);
                 info.Arguments = "run --quiet dls:bootstrap -- --progress";
                 var bootstrapProcess = new Process() { StartInfo = info };
                 bootstrapProcess.Start();
-                await ReportInstallProgressAsync(bootstrapProcess.StandardError);
+                await ReportInstallProgressAsync(bootstrapProcess.StandardError).ConfigureAwait(false);
 
-                dlsPath = await bootstrapProcess.StandardOutput.ReadToEndAsync();
+                dlsPath = await bootstrapProcess.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
             }
 
             info.FileName = dlsPath.Trim();
@@ -106,7 +106,7 @@ namespace DLanguageExtension
             return null;
         }
 
-        public async Task OnLoadedAsync() => await StartAsync.InvokeAsync(this, EventArgs.Empty);
+        public async Task OnLoadedAsync() => await StartAsync.InvokeAsync(this, EventArgs.Empty).ConfigureAwait(false);
 
         public Task OnServerInitializedAsync() => Task.CompletedTask;
 
@@ -131,7 +131,7 @@ namespace DLanguageExtension
         private async Task ShowMessageAsync(string msg, ImageMoniker moniker)
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            var shell = await ServiceProvider.GetGlobalServiceAsync<SVsShell, IVsShell>();
+            var shell = await ServiceProvider.GetGlobalServiceAsync<SVsShell, IVsShell>().ConfigureAwait(true);
             shell.GetProperty((int)__VSSPROPID7.VSSPROPID_MainWindowInfoBarHost, out var hostObj);
 
             if (hostObj == null)
@@ -139,7 +139,7 @@ namespace DLanguageExtension
                 return;
             }
 
-            var infobar = await ServiceProvider.GetGlobalServiceAsync<SVsInfoBarUIFactory, IVsInfoBarUIFactory>();
+            var infobar = await ServiceProvider.GetGlobalServiceAsync<SVsInfoBarUIFactory, IVsInfoBarUIFactory>().ConfigureAwait(true);
             var uiInfobar = infobar.CreateInfoBar(new InfoBarModel(msg, moniker));
             var host = hostObj as IVsInfoBarHost;
             host.AddInfoBar(uiInfobar);
@@ -147,32 +147,40 @@ namespace DLanguageExtension
 
         private async Task ReportInstallProgressAsync(StreamReader error)
         {
-            var firstLine = await error.ReadLineAsync();
+            var firstLine = await error.ReadLineAsync().ConfigureAwait(false);
             var total = Convert.ToUInt32(firstLine);
 
             while (!error.EndOfStream)
             {
-                var line = await error.ReadLineAsync();
+                var line = await error.ReadLineAsync().ConfigureAwait(false);
 
                 switch (line)
                 {
                     case "extract":
-                        await WithStatusbarAsync(sb => sb.Progress(ref progressCookie, 0, "Extracting", 0, 0)).ConfigureAwait(false);
+                        await WithStatusbarAsync(sb =>
+                        {
+                            ThreadHelper.ThrowIfNotOnUIThread();
+                            sb.Progress(ref progressCookie, 0, "Extracting", 0, 0);
+                        }).ConfigureAwait(false);
                         break;
 
                     default:
-                        await WithStatusbarAsync(sb => sb.Progress(ref progressCookie, 1, "Installing DLS", Convert.ToUInt32(line), total)).ConfigureAwait(false);
+                        await WithStatusbarAsync(sb =>
+                        {
+                            ThreadHelper.ThrowIfNotOnUIThread();
+                            sb.Progress(ref progressCookie, 1, "Installing DLS", Convert.ToUInt32(line), total);
+                        }).ConfigureAwait(false);
                         break;
                 }
             }
 
-            await WithStatusbarAsync(sb => sb.Clear()).ConfigureAwait(false);
+            await WithStatusbarAsync(sb => { ThreadHelper.ThrowIfNotOnUIThread(); sb.Clear(); }).ConfigureAwait(false);
         }
 
         private async Task WithStatusbarAsync(Action<IVsStatusbar> action)
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            var statusbar = await ServiceProvider.GetGlobalServiceAsync<SVsStatusbar, IVsStatusbar>();
+            var statusbar = await ServiceProvider.GetGlobalServiceAsync<SVsStatusbar, IVsStatusbar>().ConfigureAwait(true);
             action(statusbar);
         }
     }

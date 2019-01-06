@@ -44,6 +44,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>DLanguageExtension.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +53,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>DLanguageExtension.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="source.extension.cs">
@@ -94,6 +96,7 @@
     <Content Include="Grammars\sdl.tmLanguage.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="DLanguageExtension.ruleset" />
     <None Include="Key.snk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
