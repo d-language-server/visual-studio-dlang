@@ -1,5 +1,7 @@
 # D support for Visual Studio
 
+[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/LaurentTreguier.visual-studio-dlang.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.visual-studio-dlang)
+
 A Visual Studio extension for [Dlang](https://dlang.org).
 Provides syntax highlighting and editing features using the [Language Server protocol](https://microsoft.github.io/language-server-protocol).
 
