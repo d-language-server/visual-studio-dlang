@@ -73,19 +73,19 @@ namespace DLanguageExtension
                     return null;
                 }
 
-                await WithStatusbarAsync(sb => sb.SetText("Removing any previous DLS version"));
+                await WithStatusbarAsync(sb => sb.SetText("Removing any previous DLS version")).ConfigureAwait(false);
                 info.Arguments = "remove dls";
                 var removeProcess = new Process() { StartInfo = info };
                 removeProcess.Start();
                 await removeProcess.WaitForExitAsync();
 
-                await WithStatusbarAsync(sb => sb.SetText("Fetching DLS"));
+                await WithStatusbarAsync(sb => sb.SetText("Fetching DLS")).ConfigureAwait(false);
                 info.Arguments = "fetch dls";
                 var fetchProcess = new Process() { StartInfo = info };
                 fetchProcess.Start();
                 await fetchProcess.WaitForExitAsync();
 
-                await WithStatusbarAsync(sb => sb.SetText("Installing DLS"));
+                await WithStatusbarAsync(sb => sb.SetText("Installing DLS")).ConfigureAwait(false);
                 info.Arguments = "run --quiet dls:bootstrap -- --progress";
                 var bootstrapProcess = new Process() { StartInfo = info };
                 bootstrapProcess.Start();
@@ -157,16 +157,16 @@ namespace DLanguageExtension
                 switch (line)
                 {
                     case "extract":
-                        await WithStatusbarAsync(sb => sb.Progress(ref progressCookie, 0, "Extracting", 0, 0));
+                        await WithStatusbarAsync(sb => sb.Progress(ref progressCookie, 0, "Extracting", 0, 0)).ConfigureAwait(false);
                         break;
 
                     default:
-                        await WithStatusbarAsync(sb => sb.Progress(ref progressCookie, 1, "Installing DLS", Convert.ToUInt32(line), total));
+                        await WithStatusbarAsync(sb => sb.Progress(ref progressCookie, 1, "Installing DLS", Convert.ToUInt32(line), total)).ConfigureAwait(false);
                         break;
                 }
             }
 
-            await WithStatusbarAsync(sb => sb.Clear());
+            await WithStatusbarAsync(sb => sb.Clear()).ConfigureAwait(false);
         }
 
         private async Task WithStatusbarAsync(Action<IVsStatusbar> action)
