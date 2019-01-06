@@ -8,7 +8,7 @@
         <License>LICENSE.txt</License>
         <GettingStartedGuide>README.txt</GettingStartedGuide>
         <Icon>Resources\icon.png</Icon>
-        <Tags>d dlang lsp language-server</Tags>
+        <Tags>d, dlang, lsp, language-server</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />

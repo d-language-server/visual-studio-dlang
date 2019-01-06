@@ -13,6 +13,6 @@ namespace DLanguageExtension
         public const string Language = "en-US";
         public const string Version = "1.0.0";
         public const string Author = "Laurent Tréguier";
-        public const string Tags = "d dlang lsp language-server";
+        public const string Tags = "d, dlang, lsp, language-server";
     }
 }
