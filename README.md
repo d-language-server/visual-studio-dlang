@@ -1,4 +1,4 @@
-﻿# D support for Visual Studio
+# D support for Visual Studio
 
 A Visual Studio extension for [Dlang](https://dlang.org).
 Provides syntax highlighting and editing features using the [Language Server protocol](https://microsoft.github.io/language-server-protocol).
