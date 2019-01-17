@@ -77,6 +77,9 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Resource Include="Icons\d.png" />
+    <None Include="Icons\d.svg" />
+    <Resource Include="Icons\dpp.png" />
+    <None Include="Icons\dpp.svg" />
     <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -88,7 +91,6 @@
     <Content Include="source.extension.ico">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
     </Content>
-    <None Include="Icons\d.svg" />
     <Content Include="Icons\Monikers.imagemanifest">
       <IncludeInVSIX>true</IncludeInVSIX>
       <SubType>Designer</SubType>

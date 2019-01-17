@@ -3,3 +3,6 @@
 
 [$RootKey$\ShellFileAssociations\.di]
 "DefaultIconMoniker"="fc64b49a-9508-49e4-9522-14c73a839464:0"
+
+[$RootKey$\ShellFileAssociations\.dpp]
+"DefaultIconMoniker"="fc64b49a-9508-49e4-9522-14c73a839464:1"

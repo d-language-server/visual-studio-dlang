@@ -6,10 +6,16 @@
     <String Name="Resources" Value="/DLanguageExtension;Component/Icons" />
     <Guid Name="AssetsGuid" Value="{fc64b49a-9508-49e4-9522-14c73a839464}" />
     <ID Name="d" Value="0" />
+    <ID Name="dpp" Value="1" />
   </Symbols>
   <Images>
     <Image Guid="$(AssetsGuid)" ID="$(d)">
       <Source Uri="$(Resources)/d.png">
+        <Size Value="32" />
+      </Source>
+    </Image>
+    <Image Guid="$(AssetsGuid)" ID="$(dpp)">
+      <Source Uri="$(Resources)/dpp.png">
         <Size Value="32" />
       </Source>
     </Image>
