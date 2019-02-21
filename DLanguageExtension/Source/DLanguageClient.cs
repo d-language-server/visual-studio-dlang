@@ -65,7 +65,7 @@ namespace DLanguageExtension
             if (!File.Exists(dlsPath))
             {
                 var dub = FindInPath(new string[] { "dub.exe" });
-                var compiler = FindInPath(new string[] { "dmd.exe", "ldc2.exe" });
+                var compiler = FindInPath(new string[] { "dmd.exe", "ldc2.exe", "gdc.exe" });
 
                 if (dub == null || compiler == null)
                 {
